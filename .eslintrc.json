@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "env": {
+    "jest": true,
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "extends": ["@guardian/eslint-config"],
+  "ignorePatterns": ["dist", "coverage"],
+  "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "extends": ["@guardian/eslint-config-typescript"]
+    }
+  ]
+}
