@@ -5,7 +5,7 @@
 ## Example
 
 ```html
-<style id="auto-foft-fonts">
+<style data-auto-foft-fonts>
     @font-face {
         font-family: 'my font';
         font-style: normal;

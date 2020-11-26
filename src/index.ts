@@ -30,7 +30,7 @@ if ('fonts' in document) {
 	const stylesheet = getFontFaceStylesheet();
 
 	if (!stylesheet) {
-		console.warn("Could not find 'auto-foft-fonts' stylesheet.");
+		console.warn("Could not find '[data-auto-foft-fonts]' stylesheet.");
 	} else {
 		try {
 			// get a list of the currently defined @font-faces

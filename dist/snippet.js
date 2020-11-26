@@ -4,15 +4,13 @@
     try {
 
     /**
-     * Get the stylesheet that contains guardian @font-face definitions (id='auto-foft-fonts').
+     * Get the stylesheet that contains auto-foft @font-face definitions (`style[data-auto-foft-fonts]`).
      * Note that this is _not_ the style element itself.
      * https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet
      */
     const getFontFaceStylesheet = () => Array.from(document.styleSheets).find((styleSheet) => {
         const ownerNode = styleSheet.ownerNode;
-        if (ownerNode.id) {
-            return ownerNode.id === 'auto-foft-fonts';
-        }
+        return typeof ownerNode.dataset.autoFoftFonts !== 'undefined';
     });
 
     const isInDefaultSet = (fontFace) => fontFace.style === 'normal' &&
@@ -78,7 +76,7 @@
         // get a reference to the font styleSheet
         const stylesheet = getFontFaceStylesheet();
         if (!stylesheet) {
-            console.warn("Could not find 'auto-foft-fonts' stylesheet.");
+            console.warn("Could not find '[data-auto-foft-fonts]' stylesheet.");
         }
         else {
             try {
