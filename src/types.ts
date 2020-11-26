@@ -3,9 +3,9 @@ export type FontFaceSet = FontFace[];
 declare global {
 	interface Window {
 		autoFoft?: {
-			defaultRules?: Tests;
+			isCritical?: IsCritical;
 		};
 	}
 }
 
-export type Tests = Array<(fontFace: FontFace) => boolean>;
+export type IsCritical = (fontFace: FontFace) => boolean;

@@ -1,8 +1,8 @@
 /**
  * Selectively loads @font-face files as two sets:
  *
- * 	- defaults (normal weight and normal style)
- * 	- extras (non-normal weights and styles)
+ * 	- critical (normal weight and normal style)
+ * 	- deferred (non-normal weights and styles)
  *
  * This is basically FOFT.
  * See for more info https://www.zachleat.com/web/webfont-glossary/#foft
@@ -14,9 +14,9 @@
  *
  * 1. get a list of @font-faces already declared in CSS
  * 2. disable them, rendering immediately using fallback fonts
- * 3. split the list of @font-faces into defaults and extras
- * 4. fetch defaults files and enable them in one go
- * 5. fetch extras files and enable them in one go
+ * 3. split the list of @font-faces into critical and deferred
+ * 4. fetch critical files and enable them in one go
+ * 5. fetch deferred files and enable them in one go
  */
 
 //  n.b. bundled output is wrapped in try/catch by rollup
@@ -39,12 +39,12 @@ if ('fonts' in document) {
 			// disable the existing CSS-connected @font-face definitions
 			stylesheet.disabled = true;
 
-			// create the default and extras sets
-			const { defaults, extras } = getSets(fontsFaces);
+			// create the default and deferred sets
+			const { critical, deferred } = getSets(fontsFaces);
 
-			// load and apply the default set, and then the extras
-			void loadAndApplyFonts(defaults).then(() => {
-				void loadAndApplyFonts(extras);
+			// load and apply the default set, and then the deferred
+			void loadAndApplyFonts(critical).then(() => {
+				void loadAndApplyFonts(deferred);
 			});
 		} catch (e) {
 			console.error(e);
