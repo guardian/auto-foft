@@ -1,5 +1,5 @@
 {
-  "name": "@guardian/auto-foft",
+  "name": "auto-foft",
   "version": "0.1.0",
   "description": "",
   "license": "MIT",
@@ -7,7 +7,7 @@
   "main": "dist/snippet.min.js",
   "source": "dist/snippet.js",
   "scripts": {
-    "build": "rm -rf dist && rollup -c && node ./lib/inject-snippet.js",
+    "build": "rm -rf dist && rollup -c && node ./lib/update-readme.js",
     "dev": "rollup -cw"
   },
   "prettier": "@guardian/prettier",

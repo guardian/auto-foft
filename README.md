@@ -1,6 +1,4 @@
-_work in progress!_
-
-# @guardian/auto-foft
+# auto-foft
 
 Automatically prioritises and batches downloading fonts and triggering reflows when using CSS `@font-face` declarations.
 
@@ -19,7 +17,7 @@ In other words, it is automated [FOFT](https://www.zachleat.com/web/foft) for CS
     }
 </style>
 <script>
-    // @guardian/auto-foft snippet – 411 bytes (gzipped)
+    // auto-foft snippet – 411 bytes (gzipped)
     !function(){"use strict";try{var n=funct // ...etc
 </script>
 ```
