@@ -4,14 +4,14 @@
     try {
 
     /**
-     * Get the stylesheet that contains guardian @font-face definitions (id='gu-font-faces').
+     * Get the stylesheet that contains guardian @font-face definitions (id='auto-foft-fonts').
      * Note that this is _not_ the style element itself.
      * https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet
      */
     const getFontFaceStylesheet = () => Array.from(document.styleSheets).find((styleSheet) => {
         const ownerNode = styleSheet.ownerNode;
         if (ownerNode.id) {
-            return ownerNode.id === 'gu-font-faces';
+            return ownerNode.id === 'auto-foft-fonts';
         }
     });
 
@@ -78,7 +78,7 @@
         // get a reference to the font styleSheet
         const stylesheet = getFontFaceStylesheet();
         if (!stylesheet) {
-            console.warn("Could not find 'gu-font-faces' stylesheet.");
+            console.warn("Could not find 'auto-foft-fonts' stylesheet.");
         }
         else {
             try {
