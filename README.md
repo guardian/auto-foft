@@ -4,6 +4,11 @@
 
 ## Example
 
+### Default behaviour
+
+1. `my-font.woff2` will be downloaded and applied first
+2. `my-font-bold.woff2` and `my-font-italic.woff2` will be downloaded and applied second
+
 ```html
 <style data-auto-foft-fonts>
     @font-face {
@@ -11,16 +16,73 @@
         font-style: normal;
         font-weight: normal;
         src: url('my-font.woff2') format('woff2');
-        /* etc */
+    }
+    @font-face {
+        font-family: 'my font';
+        font-style: normal;
+        font-weight: bold;
+        src: url('my-font-bold.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'my font';
+        font-style: italic;
+        font-weight: normal;
+        src: url('my-font-italic.woff2') format('woff2');
     }
 </style>
 <script>
-    // auto-foft snippet – 416 bytes (gzipped)
-    !function(){"use strict";try{const e=()=>Array.from(document.styleSheets).find((e=>{const t=e.ownerNode;if(t.id)return"gu-font-faces"===t.id})),t=e=>"normal"===e.style&&("normal"===e.weight||"400"===e.weight),o=e=>e.reduce(((e,o)=>(t(o)?e.defaults.push(o):e.extras.push(o),e)),{defaults:[],extras:[]}),s=e=>Promise.all(e.map((e=>(e.load(),e.loaded)))).then((()=>{requestAnimationFrame((()=>{e.forEach((e=>{document.fonts.add(e)}))}))}));if("fonts"in document){const t=e();if(t)try{const e=Array.from(document.fonts);t.disabled=!0;const{defaults:n,extras:r}=o(e);s(n).then((()=>{s(r)}))}catch(e){console.error(e),t.disabled=!1}else console.warn("Could not find 'gu-font-faces' stylesheet.")}}catch(e){console.error(e)}}();
+    // auto-foft snippet – 478 bytes (gzipped)
+    try{const e=()=>Array.from(document.styleSheets).find((o=>void 0!==o.ownerNode.dataset.autoFoftFonts));var o,t;const s=null!==(t=null===(o=window.autoFoft)||void 0===o?void 0:o.defaultRules)&&void 0!==t?t:[o=>"normal"===o.style&&("normal"===o.weight||"400"===o.weight)],n=o=>s.some((t=>(console.log(o,t(o)),t(o)))),a=o=>o.reduce(((o,t)=>(n(t)?o.defaults.push(t):o.extras.push(t),o)),{defaults:[],extras:[]}),d=o=>Promise.all(o.map((o=>(o.load(),o.loaded)))).then((()=>{requestAnimationFrame((()=>{o.forEach((o=>{document.fonts.add(o)}))}))}));if("fonts"in document){const o=e();if(o)try{const t=Array.from(document.fonts);o.disabled=!0;const{defaults:e,extras:s}=a(t);d(e).then((()=>{d(s)}))}catch(t){console.error(t),o.disabled=!1}else console.warn("Could not find '[data-auto-foft-fonts]' stylesheet.")}}catch(o){console.error(o)}
 </script>
 ```
 
-[Get the snippet](dist/snippet.min.js)
+### Custom behaviour
+
+You can override the default behaviour by providing an array of functions to test each font with:
+
+```js
+window.autoFoft = {
+    defaultRules: [({ style }) => style === 'italic'],
+};
+```
+
+If `auto-foft` finds this config, it will test fonts against each of the rules you provide. If a rule returns `true`, the font will be added to the _defaults_ set.
+
+Functions are passed the [`FontFace`](https://developer.mozilla.org/en-US/docs/Web/API/FontFace) object for each font, and should return `true` or `false`.
+
+With this config:
+
+1. `my-font-italic.woff2` will be downloaded and applied first
+2. `my-font.woff2` and `my-font-bold.woff2` will be downloaded and applied second
+
+Note that this disables the default behaviour. You can recreate the default by adding matching rule:
+
+```js
+window.autoFoft = {
+    defaultRules: [
+        ({ style }) => style === 'italic',
+
+        // default rule
+        ({ style }) =>
+            style === 'normal' && (weight === 'normal' || weight === '400'),
+    ],
+};
+```
+
+## Usage
+
+1. Put your `@font-face` rules (and only them) in a `<style data-auto-foft-fonts>` element.
+2. Add any config, then [the snippet](dist/snippet.min.js), immediately after.
+
+```html
+<style data-auto-foft-fonts>
+    /* @font-faces in here */
+</style>
+<script>
+    // - optional config here
+    // - then the snippet here
+</script>
+```
 
 ## Benefits
 
@@ -34,7 +96,7 @@ Reflows triggered by font changes are applied in two batches, rather than every 
 
 #### Tiny footprint
 
-411 bytes (gzipped).
+478 bytes (gzipped).
 
 #### Unobtrusive
 

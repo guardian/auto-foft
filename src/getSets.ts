@@ -1,12 +1,21 @@
-import type { FontFaceSet } from './types';
+import type { FontFaceSet, Tests } from './types';
 
 type GetSets = (
 	fontsFaces: FontFaceSet,
 ) => { defaults: FontFaceSet; extras: FontFaceSet };
 
-const isInDefaultSet = (fontFace: FontFace): boolean =>
-	fontFace.style === 'normal' &&
-	(fontFace.weight === 'normal' || fontFace.weight === '400');
+const tests: Tests = window.autoFoft?.defaultRules ?? [
+	(fontFace): boolean =>
+		fontFace.style === 'normal' &&
+		(fontFace.weight === 'normal' || fontFace.weight === '400'),
+];
+
+const isInDefaultSet = (fontFace: FontFace) =>
+	tests.some((test) => {
+		console.log(fontFace, test(fontFace));
+
+		return test(fontFace);
+	});
 
 /**
  * Create the two sets of fonts:
