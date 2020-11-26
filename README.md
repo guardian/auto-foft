@@ -46,14 +46,14 @@ window.autoFoft = {
 };
 ```
 
-If `auto-foft` finds this config, it will test fonts against each of the rules you provide. If a rule returns `true`, the font will be added to the _defaults_ set.
-
-Functions are passed the [`FontFace`](https://developer.mozilla.org/en-US/docs/Web/API/FontFace) object for each font, and should return `true` or `false`.
-
 With this config:
 
 1. `my-font-italic.woff2` will be downloaded and applied first
 2. `my-font.woff2` and `my-font-bold.woff2` will be downloaded and applied second
+
+If `auto-foft` finds a config on `window`, it will test fonts against each of the rules you provide. If a rule returns `true`, the font will be added to the _defaults_ set.
+
+Functions are called with the [`FontFace`](https://developer.mozilla.org/en-US/docs/Web/API/FontFace) object for each font.
 
 Note that this disables the default behaviour. You can recreate the default by adding matching rule:
 
@@ -100,7 +100,7 @@ Reflows triggered by font changes are applied in two batches, rather than every 
 
 #### Unobtrusive
 
-No `.font-loaded`-style classes needed.
+No `.font-loaded`-style class toggling is needed.
 
 #### Robust
 
@@ -118,7 +118,7 @@ _All_ declared fonts are fetched, regardless of whether they are used (unlike pu
 -   disables the CSS-connected fonts – the page will render using fallback fonts (initial flow)
 -   downloads the _defaults_ set
 -   applies the fonts in the _defaults_ set in one pass (first reflow)
-    -   **bold** and _italic_ styles will be rendered using faux styles
+    -   missing **bold** and _italic_ fonts will be rendered using faux styles
 -   downloads the _extras_ set
 -   applies the fonts in the _extras_ set in one pass (second reflow)
 
