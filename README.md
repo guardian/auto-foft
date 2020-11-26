@@ -1,10 +1,10 @@
 _work in progress!_
 
-# @guardian/font-set-loader
+# @guardian/auto-foft
 
-Automatically prioritises downloads and batches reflows for CSS `@font-face` declarations.
+Automatically prioritises and batches downloading fonts and triggering reflows when using CSS `@font-face` declarations.
 
-Or, automated [FOFT](https://www.zachleat.com/web/foft) for CSS.
+In other words, it is automated [FOFT](https://www.zachleat.com/web/foft) for CSS.
 
 ## Example
 
@@ -19,7 +19,7 @@ Or, automated [FOFT](https://www.zachleat.com/web/foft) for CSS.
     }
 </style>
 <script>
-    // @guardian/font-set-loader snippet (~400 bytes)
+    // @guardian/auto-foft snippet (~400 bytes)
     !function(){"use strict";try{var n=function(n){ // etc
 </script>
 ```
