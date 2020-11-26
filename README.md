@@ -18,14 +18,11 @@ In other words, it is automated [FOFT](https://www.zachleat.com/web/foft) for CS
 </style>
 <script>
     // auto-foft snippet – 411 bytes (gzipped)
-    !function(){"use strict";try{var n=funct // ...etc
+    !function(){"use strict";try{var n=function(n){return Promise.all(n.map((function(n){return n.load(),n.loaded}))).then((function(){requestAnimationFrame((function(){n.forEach((function(n){document.fonts.add(n)}))}))}))};if("fonts"in document){var t=Array.from(document.styleSheets).find((function(n){var t=n.ownerNode;if(t.id)return"gu-font-faces"===t.id}));if(t)try{var e=Array.from(document.fonts);t.disabled=!0;var r=function(n){return n.reduce((function(n,t){return function(n){return"normal"===n.style&&("normal"===n.weight||"400"===n.weight)}(t)?n.defaults.push(t):n.extras.push(t),n}),{defaults:[],extras:[]})}(e),o=r.defaults,u=r.extras;n(o).then((function(){n(u)}))}catch(n){console.error(n),t.disabled=!1}else console.warn("Could not find 'gu-font-faces' stylesheet.")}}catch(n){console.error(n)}}();
 </script>
 ```
 
-<details>
-    <summary>Get the snippet</summary>
-    <code>!function(){"use strict";try{var n=function(n){return Promise.all(n.map((function(n){return n.load(),n.loaded}))).then((function(){requestAnimationFrame((function(){n.forEach((function(n){document.fonts.add(n)}))}))}))};if("fonts"in document){var t=Array.from(document.styleSheets).find((function(n){var t=n.ownerNode;if(t.id)return"gu-font-faces"===t.id}));if(t)try{var e=Array.from(document.fonts);t.disabled=!0;var r=function(n){return n.reduce((function(n,t){return function(n){return"normal"===n.style&&("normal"===n.weight||"400"===n.weight)}(t)?n.defaults.push(t):n.extras.push(t),n}),{defaults:[],extras:[]})}(e),o=r.defaults,u=r.extras;n(o).then((function(){n(u)}))}catch(n){console.error(n),t.disabled=!1}else console.warn("Could not find 'gu-font-faces' stylesheet.")}}catch(n){console.error(n)}}();</code>
-</details>
+[Get the snippet](dist/snippet.min.js)
 
 ## Benefits
 
