@@ -13,8 +13,15 @@
         return typeof ownerNode.dataset.autoFoftFonts !== 'undefined';
     });
 
-    const isInDefaultSet = (fontFace) => fontFace.style === 'normal' &&
-        (fontFace.weight === 'normal' || fontFace.weight === '400');
+    var _a, _b;
+    const tests = (_b = (_a = window.autoFoft) === null || _a === void 0 ? void 0 : _a.defaultRules) !== null && _b !== void 0 ? _b : [
+        (fontFace) => fontFace.style === 'normal' &&
+            (fontFace.weight === 'normal' || fontFace.weight === '400'),
+    ];
+    const isInDefaultSet = (fontFace) => tests.some((test) => {
+        console.log(fontFace, test(fontFace));
+        return test(fontFace);
+    });
     /**
      * Create the two sets of fonts:
      *

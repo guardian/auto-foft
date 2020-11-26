@@ -31,8 +31,8 @@
     }
 </style>
 <script>
-    // auto-foft snippet – 478 bytes (gzipped)
-    try{const e=()=>Array.from(document.styleSheets).find((o=>void 0!==o.ownerNode.dataset.autoFoftFonts));var o,t;const s=null!==(t=null===(o=window.autoFoft)||void 0===o?void 0:o.defaultRules)&&void 0!==t?t:[o=>"normal"===o.style&&("normal"===o.weight||"400"===o.weight)],n=o=>s.some((t=>(console.log(o,t(o)),t(o)))),a=o=>o.reduce(((o,t)=>(n(t)?o.defaults.push(t):o.extras.push(t),o)),{defaults:[],extras:[]}),d=o=>Promise.all(o.map((o=>(o.load(),o.loaded)))).then((()=>{requestAnimationFrame((()=>{o.forEach((o=>{document.fonts.add(o)}))}))}));if("fonts"in document){const o=e();if(o)try{const t=Array.from(document.fonts);o.disabled=!0;const{defaults:e,extras:s}=a(t);d(e).then((()=>{d(s)}))}catch(t){console.error(t),o.disabled=!1}else console.warn("Could not find '[data-auto-foft-fonts]' stylesheet.")}}catch(o){console.error(o)}
+    // auto-foft snippet – 497 bytes (gzipped)
+    !function(){"use strict";try{const e=()=>Array.from(document.styleSheets).find((o=>void 0!==o.ownerNode.dataset.autoFoftFonts));var o,t;const s=null!==(t=null===(o=window.autoFoft)||void 0===o?void 0:o.defaultRules)&&void 0!==t?t:[o=>"normal"===o.style&&("normal"===o.weight||"400"===o.weight)],n=o=>s.some((t=>(console.log(o,t(o)),t(o)))),a=o=>o.reduce(((o,t)=>(n(t)?o.defaults.push(t):o.extras.push(t),o)),{defaults:[],extras:[]}),d=o=>Promise.all(o.map((o=>(o.load(),o.loaded)))).then((()=>{requestAnimationFrame((()=>{o.forEach((o=>{document.fonts.add(o)}))}))}));if("fonts"in document){const o=e();if(o)try{const t=Array.from(document.fonts);o.disabled=!0;const{defaults:e,extras:s}=a(t);d(e).then((()=>{d(s)}))}catch(t){console.error(t),o.disabled=!1}else console.warn("Could not find '[data-auto-foft-fonts]' stylesheet.")}}catch(o){console.error(o)}}();
 </script>
 ```
 
@@ -96,7 +96,7 @@ Reflows triggered by font changes are applied in two batches, rather than every 
 
 #### Tiny footprint
 
-478 bytes (gzipped).
+497 bytes (gzipped).
 
 #### Unobtrusive
 
