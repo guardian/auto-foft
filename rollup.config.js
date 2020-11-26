@@ -34,7 +34,7 @@ export default {
 		{
 			file: pkg.source,
 			plugins: [
-				html({ template: require('./demo-page.js') }),
+				html({ template: require('./lib/demo-page.js') }),
 				process.env.ROLLUP_WATCH && serve('dist'),
 				process.env.ROLLUP_WATCH && livereload({ watch: 'dist' }),
 			],
