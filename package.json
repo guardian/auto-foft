@@ -11,16 +11,11 @@
     "dev": "rollup -cw"
   },
   "prettier": "@guardian/prettier",
-  "dependencies": {
-    "@rollup/plugin-typescript": "^6.1.0",
-    "rollup": "^2.33.3",
-    "rollup-plugin-size": "^0.2.2",
-    "rollup-plugin-terser": "^7.0.2"
-  },
   "devDependencies": {
     "@guardian/eslint-config-typescript": "^0.4.1",
     "@guardian/prettier": "^0.4.1",
     "@rollup/plugin-html": "^0.2.0",
+    "@rollup/plugin-typescript": "^6.1.0",
     "@types/css-font-loading-module": "^0.0.4",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
@@ -31,8 +26,11 @@
     "eslint-plugin-prettier": "^3.1.4",
     "gzip-size": "^6.0.0",
     "prettier": "^2.2.0",
+    "rollup": "^2.33.3",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-size": "^0.2.2",
+    "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.0.3",
     "typescript": "^4.1.2"
   }
