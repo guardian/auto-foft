@@ -1,170 +1,670 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>font loading test</title>
+    <style id="gu-font-faces">
+      @font-face {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 900;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Black.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Black.woff")
+            format("woff");
+      }
 
-	<!DOCTYPE html>
-	<html>
-		<head>
-			<title>font loading test</title>
-			<style id="gu-font-faces">
-				@font-face {
-					font-family: 'Text Egyptian';
-					font-style: normal;
-					font-weight: 400;
-					font-display: swap;
-					src: url('//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2')
-							format('woff2'),
-						url('//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff')
-							format('woff');
-				}
-				@font-face {
-					font-family: 'Text Egyptian';
-					font-style: normal;
-					font-weight: 500;
-					font-display: swap;
-					src: url('//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2')
-							format('woff2'),
-						url('//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff')
-							format('woff');
-				}
-				@font-face {
-					font-family: 'Text Egyptian';
-					font-style: italic;
-					font-weight: 400;
-					font-display: swap;
-					src: url('//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2')
-							format('woff2'),
-						url('//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff')
-							format('woff');
-				}
-			</style>
-			<script>
-				(function () {
-    'use strict';
+      @font-face {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 900;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BlackItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BlackItalic.woff")
+            format("woff");
+      }
 
-    try {
+      @font-face {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff")
+            format("woff");
+      }
 
-    /**
-     * Get the stylesheet that contains guardian @font-face definitions (id='gu-font-faces').
-     * Note that this is _not_ the style element itself.
-     * https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet
-     */
-    var getFontFaceStylesheet = function () {
-        return Array.from(document.styleSheets).find(function (styleSheet) {
-            var ownerNode = styleSheet.ownerNode;
-            if (ownerNode.id) {
-                return ownerNode.id === 'gu-font-faces';
-            }
-        });
-    };
+      @font-face {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 700;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.woff")
+            format("woff");
+      }
 
-    var isInDefaultSet = function (fontFace) {
-        return fontFace.style === 'normal' &&
-            (fontFace.weight === 'normal' || fontFace.weight === '400');
-    };
-    /**
-     * Create the two sets of fonts:
-     *
-     *  - defaults (normal weight and normal style)
-     * 	- extras (non-normal weights and styles)
-     *
-     * This is basically FOFT.
-     * See for more info https://www.zachleat.com/web/webfont-glossary/#foft
-     *
-     * @param fontsFaces Array of fontfaces to split into sets
-     */
-    var getSets = function (fontsFaces) {
-        return fontsFaces.reduce(function (acc, fontFace) {
-            if (isInDefaultSet(fontFace)) {
-                acc.defaults.push(fontFace);
-            }
-            else {
-                acc.extras.push(fontFace);
-            }
-            return acc;
-        }, { defaults: [], extras: [] });
-    };
+      @font-face {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff")
+            format("woff");
+      }
 
-    /**
-     * Fetches font files then enables @font-face definitions for each of them simultaneously.
-     *
-     * @param fonts Array of fontFaces to load
-     */
-    var loadAndApplyFonts = function (fonts) {
-        return Promise.all(fonts.map(function (font) {
-            void font.load();
-            return font.loaded;
-        })).then(function () {
-            requestAnimationFrame(function () {
-                fonts.forEach(function (font) {
-                    document.fonts.add(font);
-                });
+      @font-face {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 300;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 500;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Regular.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Regular.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-RegularItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-RegularItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Semibold.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Semibold.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 600;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-SemiboldItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-SemiboldItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textegyptian;
+        font-style: normal;
+        font-weight: 900;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Black.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Black.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textegyptian;
+        font-style: italic;
+        font-weight: 900;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BlackItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BlackItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textegyptian;
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textegyptian;
+        font-style: italic;
+        font-weight: 700;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textegyptian;
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Medium.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Medium.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textegyptian;
+        font-style: italic;
+        font-weight: 500;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-MediumItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-MediumItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textegyptian;
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textegyptian;
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textsans;
+        font-style: normal;
+        font-weight: normal;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Black.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Black.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textsans;
+        font-style: italic;
+        font-weight: 900;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BlackItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BlackItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textsans;
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textsans;
+        font-style: italic;
+        font-weight: 700;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textsans;
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Medium.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Medium.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textsans;
+        font-style: italic;
+        font-weight: 500;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-MediumItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-MediumItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textsans;
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-textsans;
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: guardian-titlepiece;
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url("//assets.guim.co.uk/static/frontend/fonts/guardian-titlepiece/noalts-not-hinted/GTGuardianTitlepiece-Bold.woff2")
+            format("woff2"),
+          url("//assets.guim.co.uk/static/frontend/fonts/guardian-titlepiece/noalts-not-hinted/GTGuardianTitlepiece-Bold.woff")
+            format("woff");
+      }
+    </style>
+    <script>
+      (function () {
+        "use strict";
+
+        try {
+          /**
+           * Get the stylesheet that contains guardian @font-face definitions (id='gu-font-faces').
+           * Note that this is _not_ the style element itself.
+           * https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet
+           */
+          const getFontFaceStylesheet = () =>
+            Array.from(document.styleSheets).find((styleSheet) => {
+              const ownerNode = styleSheet.ownerNode;
+              if (ownerNode.id) {
+                return ownerNode.id === "gu-font-faces";
+              }
             });
-        });
-    };
 
-    /**
-     * Selectively loads @font-face files as two sets:
-     *
-     * 	- defaults (normal weight and normal style)
-     * 	- extras (non-normal weights and styles)
-     *
-     * This is basically FOFT.
-     * See for more info https://www.zachleat.com/web/webfont-glossary/#foft
-     *
-     * This has the benefit of only repainting twice, rather when each font file arrives.
-     * It has the downside that _all_ fonts are fetched, regardless of whether they are used.
-     *
-     * What it does:
-     *
-     * 1. get a list of @font-faces already declared in CSS
-     * 2. disable them, rendering immediately using fallback fonts
-     * 3. split the list of @font-faces into defaults and extras
-     * 4. fetch defaults files and enable them in one go
-     * 5. fetch extras files and enable them in one go
-     */
-    if ('fonts' in document) {
-        // get a reference to the font styleSheet
-        var stylesheet = getFontFaceStylesheet();
-        if (!stylesheet) {
-            console.warn("Could not find 'gu-font-faces' stylesheet.");
-        }
-        else {
-            try {
+          const isInDefaultSet = (fontFace) =>
+            fontFace.style === "normal" &&
+            (fontFace.weight === "normal" || fontFace.weight === "400");
+          /**
+           * Create the two sets of fonts:
+           *
+           *  - defaults (normal weight and normal style)
+           * 	- extras (non-normal weights and styles)
+           *
+           * This is basically FOFT.
+           * See for more info https://www.zachleat.com/web/webfont-glossary/#foft
+           *
+           * @param fontsFaces Array of fontfaces to split into sets
+           */
+          const getSets = (fontsFaces) =>
+            fontsFaces.reduce(
+              (acc, fontFace) => {
+                if (isInDefaultSet(fontFace)) {
+                  acc.defaults.push(fontFace);
+                } else {
+                  acc.extras.push(fontFace);
+                }
+                return acc;
+              },
+              { defaults: [], extras: [] }
+            );
+
+          /**
+           * Fetches font files then enables @font-face definitions for each of them simultaneously.
+           *
+           * @param fonts Array of fontFaces to load
+           */
+          const loadAndApplyFonts = (fonts) =>
+            Promise.all(
+              fonts.map((font) => {
+                void font.load();
+                return font.loaded;
+              })
+            ).then(() => {
+              requestAnimationFrame(() => {
+                fonts.forEach((font) => {
+                  document.fonts.add(font);
+                });
+              });
+            });
+
+          /**
+           * Selectively loads @font-face files as two sets:
+           *
+           * 	- defaults (normal weight and normal style)
+           * 	- extras (non-normal weights and styles)
+           *
+           * This is basically FOFT.
+           * See for more info https://www.zachleat.com/web/webfont-glossary/#foft
+           *
+           * This has the benefit of only repainting twice, rather when each font file arrives.
+           * It has the downside that _all_ fonts are fetched, regardless of whether they are used.
+           *
+           * What it does:
+           *
+           * 1. get a list of @font-faces already declared in CSS
+           * 2. disable them, rendering immediately using fallback fonts
+           * 3. split the list of @font-faces into defaults and extras
+           * 4. fetch defaults files and enable them in one go
+           * 5. fetch extras files and enable them in one go
+           */
+          if ("fonts" in document) {
+            // get a reference to the font styleSheet
+            const stylesheet = getFontFaceStylesheet();
+            if (!stylesheet) {
+              console.warn("Could not find 'gu-font-faces' stylesheet.");
+            } else {
+              try {
                 // get a list of the currently defined @font-faces
-                var fontsFaces = Array.from(document.fonts);
+                const fontsFaces = Array.from(document.fonts);
                 // disable the existing CSS-connected @font-face definitions
                 stylesheet.disabled = true;
                 // create the default and extras sets
-                var _a = getSets(fontsFaces), defaults = _a.defaults, extras_1 = _a.extras;
+                const { defaults, extras } = getSets(fontsFaces);
                 // load and apply the default set, and then the extras
-                void loadAndApplyFonts(defaults).then(function () {
-                    void loadAndApplyFonts(extras_1);
+                void loadAndApplyFonts(defaults).then(() => {
+                  void loadAndApplyFonts(extras);
                 });
-            }
-            catch (e) {
+              } catch (e) {
                 console.error(e);
                 // something went wrong, re-enable the stylesheet and let the browser take over
                 stylesheet.disabled = false;
+              }
             }
+          }
+        } catch (e) {
+          console.error(e);
         }
-    }
+      })();
+    </script>
+    <style>
+      body {
+        font-size: 200%;
+      }
 
-    }catch(e){console.error(e)}
+      .guardian-headline-normal-900 {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 900;
+      }
 
-}());
+      .guardian-headline-italic-900 {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 900;
+      }
 
-			</script>
-			<style>
-				body {
-					font-family: 'Text Egyptian', Georgia, 'Times New Roman', Times,
-						serif;
-				}
-			</style>
-		</head>
-		<body>
-			<ul>
-			<li>normal text</li>
-			<li><strong>bold text</strong></li>
-			<li><em>italic text</em></li>
-			<li><strong><em>bold italic text</em></strong></li>
-			</ul>
-		</body>
-	</html>
+      .guardian-headline-normal-700 {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      .guardian-headline-italic-700 {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 700;
+      }
+
+      .guardian-headline-normal-300 {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 300;
+      }
+
+      .guardian-headline-italic-300 {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 300;
+      }
+
+      .guardian-headline-normal-500 {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 500;
+      }
+
+      .guardian-headline-italic-500 {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 500;
+      }
+
+      .guardian-headline-normal-400 {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      .guardian-headline-italic-400 {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .guardian-headline-normal-600 {
+        font-family: guardian-headline;
+        font-style: normal;
+        font-weight: 600;
+      }
+
+      .guardian-headline-italic-600 {
+        font-family: guardian-headline;
+        font-style: italic;
+        font-weight: 600;
+      }
+
+      .guardian-textegyptian-normal-900 {
+        font-family: guardian-textegyptian;
+        font-style: normal;
+        font-weight: 900;
+      }
+
+      .guardian-textegyptian-italic-900 {
+        font-family: guardian-textegyptian;
+        font-style: italic;
+        font-weight: 900;
+      }
+
+      .guardian-textegyptian-normal-700 {
+        font-family: guardian-textegyptian;
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      .guardian-textegyptian-italic-700 {
+        font-family: guardian-textegyptian;
+        font-style: italic;
+        font-weight: 700;
+      }
+
+      .guardian-textegyptian-normal-500 {
+        font-family: guardian-textegyptian;
+        font-style: normal;
+        font-weight: 500;
+      }
+
+      .guardian-textegyptian-italic-500 {
+        font-family: guardian-textegyptian;
+        font-style: italic;
+        font-weight: 500;
+      }
+
+      .guardian-textegyptian-normal-400 {
+        font-family: guardian-textegyptian;
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      .guardian-textegyptian-italic-400 {
+        font-family: guardian-textegyptian;
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .guardian-textsans-normal-normal {
+        font-family: guardian-textsans;
+        font-style: normal;
+        font-weight: normal;
+      }
+
+      .guardian-textsans-italic-900 {
+        font-family: guardian-textsans;
+        font-style: italic;
+        font-weight: 900;
+      }
+
+      .guardian-textsans-normal-700 {
+        font-family: guardian-textsans;
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      .guardian-textsans-italic-700 {
+        font-family: guardian-textsans;
+        font-style: italic;
+        font-weight: 700;
+      }
+
+      .guardian-textsans-normal-500 {
+        font-family: guardian-textsans;
+        font-style: normal;
+        font-weight: 500;
+      }
+
+      .guardian-textsans-italic-500 {
+        font-family: guardian-textsans;
+        font-style: italic;
+        font-weight: 500;
+      }
+
+      .guardian-textsans-normal-400 {
+        font-family: guardian-textsans;
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      .guardian-textsans-italic-400 {
+        font-family: guardian-textsans;
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .guardian-titlepiece-normal-700 {
+        font-family: guardian-titlepiece;
+        font-style: normal;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="guardian-headline-normal-900">GHGuardianHeadline-Black</span
+    ><span class="guardian-headline-italic-900"
+      >GHGuardianHeadline-BlackItalic</span
+    ><span class="guardian-headline-normal-700">GHGuardianHeadline-Bold</span
+    ><span class="guardian-headline-italic-700"
+      >GHGuardianHeadline-BoldItalic</span
+    ><span class="guardian-headline-normal-300">GHGuardianHeadline-Light</span
+    ><span class="guardian-headline-italic-300"
+      >GHGuardianHeadline-LightItalic</span
+    ><span class="guardian-headline-normal-500">GHGuardianHeadline-Medium</span
+    ><span class="guardian-headline-italic-500"
+      >GHGuardianHeadline-MediumItalic</span
+    ><span class="guardian-headline-normal-400">GHGuardianHeadline-Regular</span
+    ><span class="guardian-headline-italic-400"
+      >GHGuardianHeadline-RegularItalic</span
+    ><span class="guardian-headline-normal-600"
+      >GHGuardianHeadline-Semibold</span
+    ><span class="guardian-headline-italic-600"
+      >GHGuardianHeadline-SemiboldItalic</span
+    ><span class="guardian-textegyptian-normal-900"
+      >GuardianTextEgyptian-Black</span
+    ><span class="guardian-textegyptian-italic-900"
+      >GuardianTextEgyptian-BlackItalic</span
+    ><span class="guardian-textegyptian-normal-700"
+      >GuardianTextEgyptian-Bold</span
+    ><span class="guardian-textegyptian-italic-700"
+      >GuardianTextEgyptian-BoldItalic</span
+    ><span class="guardian-textegyptian-normal-500"
+      >GuardianTextEgyptian-Medium</span
+    ><span class="guardian-textegyptian-italic-500"
+      >GuardianTextEgyptian-MediumItalic</span
+    ><span class="guardian-textegyptian-normal-400"
+      >GuardianTextEgyptian-Regular</span
+    ><span class="guardian-textegyptian-italic-400"
+      >GuardianTextEgyptian-RegularItalic</span
+    ><span class="guardian-textsans-normal-normal">GuardianTextSans-Black</span
+    ><span class="guardian-textsans-italic-900"
+      >GuardianTextSans-BlackItalic</span
+    ><span class="guardian-textsans-normal-700">GuardianTextSans-Bold</span
+    ><span class="guardian-textsans-italic-700"
+      >GuardianTextSans-BoldItalic</span
+    ><span class="guardian-textsans-normal-500">GuardianTextSans-Medium</span
+    ><span class="guardian-textsans-italic-500"
+      >GuardianTextSans-MediumItalic</span
+    ><span class="guardian-textsans-normal-400">GuardianTextSans-Regular</span
+    ><span class="guardian-textsans-italic-400"
+      >GuardianTextSans-RegularItalic</span
+    ><span class="guardian-titlepiece-normal-700"
+      >GTGuardianTitlepiece-Bold</span
+    >
+  </body>
+</html>
