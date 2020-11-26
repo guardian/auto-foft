@@ -1,9 +1,9 @@
 {
   "name": "auto-foft",
   "version": "0.1.0",
-  "description": "",
+  "description": "Automated FOFT for CSS fonts",
   "license": "MIT",
-  "author": "",
+  "author": "Alex Sanders <a@snd.rs>",
   "main": "dist/snippet.min.js",
   "source": "dist/snippet.js",
   "scripts": {
