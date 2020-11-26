@@ -6,7 +6,8 @@
     "node": true
   },
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaVersion": 2020
   },
   "extends": ["@guardian/eslint-config"],
   "ignorePatterns": ["dist", "coverage"],
