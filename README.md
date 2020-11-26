@@ -1,8 +1,6 @@
 # auto-foft
 
-Automatically prioritises and batches downloading fonts and triggering reflows when using CSS `@font-face` declarations.
-
-In other words, it is automated [FOFT](https://www.zachleat.com/web/foft) for CSS.
+> Automated [FOFT](https://www.zachleat.com/web/foft) for CSS fonts (`@font-face`).
 
 ## Example
 
@@ -38,13 +36,17 @@ Reflows triggered by font changes are applied in two batches, rather than every 
 
 411 bytes (gzipped).
 
+#### Unobtrusive
+
+No `.font-loaded`-style classes needed.
+
 #### Robust
 
 Falls-back to the original `@font-face` mechanism if something goes wrong.
 
 ## Downsides
 
-_All_ declared fonts are fetched, regardless of whether they are used (unlike CSS `@font-face` declarations).
+_All_ declared fonts are fetched, regardless of whether they are used (unlike pure CSS `@font-face` declarations).
 
 ## How it works
 
