@@ -124,7 +124,7 @@ _All_ declared fonts are fetched, regardless of whether they are used (unlike pu
 5. downloads the _deferred_ set
 6. applies the fonts in the _deferred_ set in one pass (_second reflow_)
 
-As with untouched CSS `@font-face` declarations, if the font files are cached locally the browser can use them immediately (_initial flow_ only).
+As with pure CSS `@font-face` declarations, if the font files are cached locally the browser can use them immediately (_initial flow_ only).
 
 ## Further options
 
