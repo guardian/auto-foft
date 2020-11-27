@@ -94,7 +94,7 @@ The font files with the highest impact on the page load first.
 
 #### Minimal reflows
 
-Reflows triggered by font changes are applied in two batches, rather than every time a new font is downloaded.
+Reflows triggered by font changes are applied in two batches, rather than every time a new font downloads.
 
 #### Tiny footprint
 
