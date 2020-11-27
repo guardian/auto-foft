@@ -128,4 +128,4 @@ As with untouched CSS `@font-face` declarations, if the font files are cached lo
 
 ## Further options
 
-To reduce the time only fallback fonts are used, [`<link rel="preload" as="font" />`](https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content) the fonts that you know will fall into the _critical_ set.
+To minimise the time that fallback fonts are used, [`<link rel="preload" as="font" />`](https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content) the fonts that you know will fall into the _critical_ set.
