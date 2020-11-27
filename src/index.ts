@@ -14,7 +14,8 @@ import { getFontFaceStylesheet } from './getFontFaceStylesheet';
 import { getSets } from './getSets';
 import { loadAndApplyFonts } from './loadAndApplyFonts';
 
-if ('fonts' in document) {
+// if we can't, or don't need to, do this, just leave it
+if ('fonts' in document && document.fonts.status !== 'loaded') {
 	const stylesheet = getFontFaceStylesheet();
 
 	if (!stylesheet) {
