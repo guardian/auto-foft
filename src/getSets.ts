@@ -19,13 +19,13 @@ export const getSets: GetSets = (fontsFaces) =>
 		critical: FontFaceSet;
 		deferred: FontFaceSet;
 	}>(
-		(acc, fontFace) => {
+		({ critical, deferred }, fontFace) => {
 			if (isCritical(fontFace)) {
-				acc.critical.push(fontFace);
+				critical.push(fontFace);
 			} else {
-				acc.deferred.push(fontFace);
+				deferred.push(fontFace);
 			}
-			return acc;
+			return { critical, deferred };
 		},
 		{ critical: [], deferred: [] },
 	);
