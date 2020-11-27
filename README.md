@@ -114,17 +114,17 @@ _All_ declared fonts are fetched, regardless of whether they are used (unlike pu
 
 ## How it works
 
--   gets a list of fonts already declared in CSS and divides them into two sets:
-    -   _critical_ (`font-weight: normal` and `font-style: normal` by default)
-    -   _deferred_ (all other weights and styles)
--   disables the CSS-connected fonts – the page will render using fallback fonts (initial flow)
--   downloads the _critical_ set
--   applies the fonts in the _critical_ set in one pass (first reflow)
-    -   missing **bold** and _italic_ fonts will be rendered using faux styles
--   downloads the _deferred_ set
--   applies the fonts in the _deferred_ set in one pass (second reflow)
+1. gets a list of fonts already declared in CSS and divides them into two sets:
+    1. _critical_ (`font-weight: normal` and `font-style: normal` by default)
+    2. _deferred_ (all the others)
+2. disables the CSS-connected fonts – the page will render using fallback fonts (_initial flow_)
+3. downloads the _critical_ set
+4. applies the fonts in the _critical_ set in one pass (_first reflow_)
+    - missing **bold** and _italic_ fonts will be rendered using faux styles
+5. downloads the _deferred_ set
+6. applies the fonts in the _deferred_ set in one pass (_second reflow_)
 
-As with CSS `@font-face` declarations, if the font files are cached locally the browser can use them immediately (initial flow only).
+As with CSS `@font-face` declarations, if the font files are cached locally the browser can use them immediately (_initial flow_ only).
 
 ## Further options
 
