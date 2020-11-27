@@ -31,8 +31,8 @@
     }
 </style>
 <script>
-    // auto-foft snippet – 481 bytes (gzipped)
-    !function(){"use strict";try{const t=()=>Array.from(document.styleSheets).find((o=>void 0!==o.ownerNode.dataset.autoFoftFonts));var o,e;const r=null!==(e=null===(o=window.autoFoft)||void 0===o?void 0:o.isCritical)&&void 0!==e?e:({style:o,weight:e})=>"normal"===o&&("normal"===e||"400"===e),n=o=>o.reduce((({critical:o,deferred:e},t)=>(r(t)?o.push(t):e.push(t),{critical:o,deferred:e})),{critical:[],deferred:[]}),d=o=>Promise.all(o.map((o=>(o.load(),o.loaded)))).then((()=>{requestAnimationFrame((()=>{o.forEach((o=>{document.fonts.add(o)}))}))}));if("fonts"in document){const o=t();if(o)try{const e=Array.from(document.fonts);o.disabled=!0;const{critical:t,deferred:r}=n(e);d(t).then((()=>{d(r)}))}catch(e){console.error(e),o.disabled=!1}else console.warn("Could not find '[data-auto-foft-fonts]' stylesheet.")}}catch(o){console.error(o)}}();
+    // auto-foft snippet – 512 bytes (gzipped)
+    !function(){"use strict";try{const t=()=>Array.from(document.styleSheets).find((e=>void 0!==e.ownerNode.dataset.autoFoftFonts));var e,o;const r=null!==(o=null===(e=window.autoFoft)||void 0===e?void 0:e.isCritical)&&void 0!==o?o:({style:e,weight:o})=>"normal"===e&&("normal"===o||"400"===o),d=e=>e.reduce((({critical:e,deferred:o},t)=>(r(t)?e.push(t):o.push(t),{critical:e,deferred:o})),{critical:[],deferred:[]}),n=e=>Promise.all(e.map((e=>(e.load(),e.loaded)))).then((()=>new Promise((o=>{requestAnimationFrame((()=>{e.forEach((e=>{document.fonts.add(e)})),o()}))}))));if("fonts"in document&&"loaded"!==document.fonts.status){const e=t();if(e)try{const o=Array.from(document.fonts);e.disabled=!0;const{critical:t,deferred:r}=d(o);n(t).then((()=>n(r))).then((()=>{e.disabled=!1}))}catch(o){console.error(o),e.disabled=!1}else console.warn("Could not find '[data-auto-foft-fonts]' stylesheet.")}}catch(e){console.error(e)}}();
 </script>
 ```
 
@@ -98,7 +98,7 @@ Reflows triggered by font changes are applied in two batches, rather than every 
 
 #### Tiny footprint
 
-481 bytes (gzipped).
+512 bytes (gzipped).
 
 #### Unobtrusive
 
