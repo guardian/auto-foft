@@ -11,10 +11,14 @@ export const loadAndApplyFonts = (fonts: FontFaceSet): Promise<void> =>
 			void font.load();
 			return font.loaded;
 		}),
-	).then(() => {
-		requestAnimationFrame(() => {
-			fonts.forEach((font) => {
-				document.fonts.add(font);
-			});
-		});
-	});
+	).then(
+		() =>
+			new Promise((resolve) => {
+				requestAnimationFrame(() => {
+					fonts.forEach((font) => {
+						document.fonts.add(font);
+					});
+					resolve();
+				});
+			}),
+	);
