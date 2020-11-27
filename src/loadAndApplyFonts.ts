@@ -1,7 +1,7 @@
 import type { FontFaceSet } from './types';
 
 /**
- * Fetches font files then enables @font-face definitions for each of them simultaneously.
+ * Fetches all font files in the set then adds each of them to the document in one go.
  *
  * @param fonts Array of fontFaces to load
  */

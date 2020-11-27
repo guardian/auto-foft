@@ -4,19 +4,8 @@
  * 	- critical (normal weight and normal style)
  * 	- deferred (non-normal weights and styles)
  *
- * This is basically FOFT.
+ * By default, it applies the principles of FOFT.
  * See for more info https://www.zachleat.com/web/webfont-glossary/#foft
- *
- * This has the benefit of only repainting twice, rather when each font file arrives.
- * It has the downside that _all_ fonts are fetched, regardless of whether they are used.
- *
- * What it does:
- *
- * 1. get a list of @font-faces already declared in CSS
- * 2. disable them, rendering immediately using fallback fonts
- * 3. split the list of @font-faces into critical and deferred
- * 4. fetch critical files and enable them in one go
- * 5. fetch deferred files and enable them in one go
  */
 
 //  n.b. bundled output is wrapped in try/catch by rollup
@@ -26,7 +15,6 @@ import { getSets } from './getSets';
 import { loadAndApplyFonts } from './loadAndApplyFonts';
 
 if ('fonts' in document) {
-	// get a reference to the font styleSheet
 	const stylesheet = getFontFaceStylesheet();
 
 	if (!stylesheet) {
@@ -39,10 +27,10 @@ if ('fonts' in document) {
 			// disable the existing CSS-connected @font-face definitions
 			stylesheet.disabled = true;
 
-			// create the default and deferred sets
+			// get the critical and deferred sets
 			const { critical, deferred } = getSets(fontsFaces);
 
-			// load and apply the default set, and then the deferred
+			// load and apply the critical set, and then the deferred
 			void loadAndApplyFonts(critical).then(() => {
 				void loadAndApplyFonts(deferred);
 			});

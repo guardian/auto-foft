@@ -9,6 +9,11 @@ const isCritical: IsCritical =
 	(({ style, weight }: FontFace): boolean =>
 		style === 'normal' && (weight === 'normal' || weight === '400'));
 
+/**
+ * Splits fonts into critical and deferred sets
+ *
+ * @param fontsFaces The fonts to test
+ */
 export const getSets: GetSets = (fontsFaces) =>
 	fontsFaces.reduce<{
 		critical: FontFaceSet;
