@@ -38,7 +38,7 @@
 
 ### Custom behaviour
 
-You can override the default behaviour by providing your own definition of _critical_ to test each font with:
+You can override the default behaviour by providing your own definition of _critical_ to test each font against:
 
 ```js
 window.autoFoft = {
