@@ -32,9 +32,12 @@ if ('fonts' in document && document.fonts.status !== 'loaded') {
 			const { critical, deferred } = getSets(fontsFaces);
 
 			// load and apply the critical set, and then the deferred
-			void loadAndApplyFonts(critical).then(() => {
-				void loadAndApplyFonts(deferred);
-			});
+			void loadAndApplyFonts(critical)
+				.then(() => loadAndApplyFonts(deferred))
+				.then(() => {
+					// belt and braces, to keep some safaris happy
+					stylesheet.disabled = false;
+				});
 		} catch (e) {
 			console.error(e);
 
