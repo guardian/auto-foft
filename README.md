@@ -46,7 +46,7 @@ window.autoFoft = {
 };
 ```
 
-With this config:
+With this definition:
 
 1. `my-font-italic.woff2` will be downloaded and applied first (_critical_)
 2. `my-font.woff2` and `my-font-bold.woff2` will be downloaded and applied second (_deferred_)
